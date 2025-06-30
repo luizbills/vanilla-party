@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "allowJs": true
+  },
+
+  "include": ["src/**/*", "test/**/*"],
+  // "include": ["src/p5.party.ts"],
+  "typeRoots": ["./node_modules/deepstream.io-client.js/src/client.d.ts"]
+}

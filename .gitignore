@@ -1,0 +1,14 @@
+# common ignores
+node_modules
+
+# build files
+dist
+version.js
+
+# build meta files
+stats.json
+meta.json
+
+# system files
+.DS_Store
+Icon[\r]

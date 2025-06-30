@@ -1,0 +1,57 @@
+{
+  "name": "vanilla-party",
+  "version": "0.1.0",
+  "author": "Luiz Bills",
+  "license": "MIT",
+  "description": "An easy to use library for simple multi-user JavaScript apps.",
+  "keywords": [
+    "multiuser",
+    "multiplayer",
+    "library"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/vanilla-party.d.ts",
+  "engines": {
+    "node": "22.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luizbills/vanilla-party.git"
+  },
+  "scripts": {
+    "dev": "npm run esbuild -- --outfile=samples/_dist/vanilla-party.js --servedir=samples",
+    "start": "npm run esbuild -- --watch --outfile=public/dist/vanilla-party.js ",
+    "test": "jest --coverage",
+    "release": "np",
+    "serve": "PORT=${PORT:-6020} deepstream start",
+    "build": "npm run esbuild -- --outfile=dist/vanilla-party.js --loader:.css=text",
+    "prepare": "npm run genversion && npm run build",
+    "postpublish": "curl https://purge.jsdelivr.net/npm/p5.party@latest/dist/vanilla-party.js",
+    "genversion": "genversion --es6 --semi version.js",
+    "esbuild": "esbuild src/index.ts --bundle --sourcemap --minify --target=es6 --define:global=window --inject:esbuild.inject.js --loader:.css=text"
+  },
+  "dependencies": {
+    "@deepstream/client": "^5.2.6",
+    "@deepstream/server": "^5.2.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/reefjs": "^7.6.1",
+    "buffer": "^6.0.3",
+    "esbuild": "^0.20.2",
+    "genversion": "^3.0.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "on-change": "^5.0.0",
+    "reefjs": "^13.0.2",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.2"
+  }
+}
