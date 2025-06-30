@@ -50,17 +50,21 @@ A single _Vanilla Party_ server can support many apps and each app can group use
 
 _Vanilla Party_ automatically designates one (and only one) guest in each room as the host. Your code can easily check if it is the host and take care of running the party. This lets you avoid writing server-side code and makes prototyping faster.
 
+## Installation and Quickstart
+
+The quickest way to get started with _Vanilla Party_ is to load or download from a [CDN](https://unpkg.com/vanilla-party@latest/dist/vanilla-party.js).
+
 ## Usage
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vanilla-server@latest/dist/vanilla-party.js"></script>
+<script src="https://unpkg.com/vanilla-party@latest/dist/vanilla-party.js"></script>
 ```
 
 ```javascript
-let shared = null
-let div = null
+window.addEventListener("load", () => {
+  let shared = null
+  let div = null
 
-function preload() {
   // server url
   const serverUrl = "wss://vanilla-party.luizbills.com/"
 
@@ -76,44 +80,46 @@ function preload() {
   // load a shared data object
   partyLoadShared("shared", { x: 0, y: 0 }, (data) => {
     shared = data
-    setup()
+    onSharedDataReady()
   })
 
   // create a div element
   div = document.createElement("div")
   document.body.append(div)
   div.textContent = `connecting...`
-}
 
-function setup() {
-  div.textContent = ""
-  div.style.cssText =
-    "width:64px;height:64px;background:red;border-radius:100%;"
-  div.style.cssText = "position:absolute;top:0px;left:0px"
+  function onSharedDataReady() {
+    const radius = 64
 
-  // listen clicks and taps
-  document.body.addEventListener("click", (ev) => {
-    div.style.top = ev.screenX
-    div.style.left = ev.screenY
-  })
+    div.textContent = ""
+    div.style.cssText = `width:${radius}px;height:${radius}px;background:red;border-radius:100%;position:absolute;`
 
-  // update the the content at 20 times per second
-  setInterval(update, 1 / 20)
-}
+    window.addEventListener("click", (ev) => {
+      // listen clicks and taps and
+      // write shared data
+      shared.x = ev.clientX - radius / 2
+      shared.y = ev.clientY - radius / 2
+    })
 
-function update() {
-  div.style.top = shared.x
-  div.style.left = shared.y
-}
+    function update() {
+      // read shared data
+      div.style.left = `${shared.x}px`
+      div.style.top = `${shared.y}px`
+    }
+
+    // call update() 30 times per second
+    setInterval(update, 1000 / 30)
+  }
+})
 ```
 
-## Installation and Quickstart
+[JSFiddle Live Example](https://jsfiddle.net/p52q9Lf8/5/)
 
-The quickest way to get started with _Vanilla Party_ is to load it from a [CDN](https://cdn.jsdelivr.net/npm/vanilla-party@latest/dist/vanilla-party.js).
+> Note: This example is using only javascript and HTML to illustrate how easy it is to get started with Vanilla Party. In our [examples](samples), we'll use P5.js for user interaction and rendering.
 
 ## Server Installation
 
-_Vanilla Party_ need to connect to a server (a [Deepstream](https://deepstream.io) instance) in order to synchronize their data. You don’t necessarily need to set up your own server. You can get started with our demo server.
+_Vanilla Party_ need to connect to a server (a [deepstream.io](https://deepstream.io) instance) in order to synchronize their data. You don’t necessarily need to set up your own server. You can get started with our demo server.
 
 But you can set up your own server in a few minutes on Heroku following this [guide](https://www.notion.so/Server-Setup-d039a4be3a044878bd5ad0931f1c93bd).
 

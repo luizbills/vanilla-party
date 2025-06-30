@@ -1,6 +1,6 @@
 {
   "name": "vanilla-party",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Luiz Bills",
   "license": "MIT",
   "description": "An easy to use library for simple multi-user JavaScript apps.",
@@ -17,9 +17,9 @@
     "dist"
   ],
   "main": "dist/index.js",
-  "types": "dist/vanilla-party.d.ts",
+  "unpkg": "./dist/vanilla-party.js",
   "engines": {
-    "node": "22.11.0"
+    "node": "22"
   },
   "repository": {
     "type": "git",
