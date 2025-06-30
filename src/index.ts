@@ -22,7 +22,7 @@ let room: Room | null = null
 const partyConnect = function (
   host: string,
   appName: string,
-  roomName = "_main",
+  roomName = "main",
   cb?: () => void
 ) {
   if (room !== null) {
