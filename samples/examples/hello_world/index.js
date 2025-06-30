@@ -1,7 +1,7 @@
 let shared
 
 function setup() {
-  partyConnect("wss://demoserver.p5party.org", "hello_party")
+  partyConnect("wss://vanilla-party.luizbills.com", "hello_party")
   partyLoadShared("shared", { x: 100, y: 100 }, (data) => {
     shared = data
   })
