@@ -113,9 +113,9 @@ The quickest way to get started with _Vanilla Party_ is to load it from a [CDN](
 
 ## Server Installation
 
-You can set up a server in a few minutes using Heroku and a clone of the p5.party repo.
+_Vanilla Party_ need to connect to a server (a [Deepstream](https://deepstream.io) instance) in order to synchronize their data. You don’t necessarily need to set up your own server. You can get started with our demo server.
 
-[Server Setup](https://www.notion.so/Server-Setup-d039a4be3a044878bd5ad0931f1c93bd)
+But you can set up your own server in a few minutes on Heroku following this [guide](https://www.notion.so/Server-Setup-d039a4be3a044878bd5ad0931f1c93bd).
 
 ## Contributing
 
