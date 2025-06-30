@@ -2,7 +2,7 @@
 
 # Vanilla Party
 
-![NPM](https://img.shields.io/npm/l/vanilla-party)
+[![NPM](https://flat.badgen.net/npm/v/vanilla-party?scale=1&label=NPM&color=blue&cache=3600)](https://npmjs.com/vanilla-party)
 
 </div>
 
