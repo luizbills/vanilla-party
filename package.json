@@ -39,12 +39,12 @@
   },
   "dependencies": {
     "@deepstream/client": "^7.0.5",
-    "@deepstream/server": "^9.1.1",
     "on-change": "^5.0.1",
     "reefjs": "^13.0.6",
     "buffer": "^6.0.3"
   },
   "devDependencies": {
+    "@deepstream/server": "^9.1.1",
     "@types/jest": "^29.5.14",
     "@types/reefjs": "^7.6.5",
     "esbuild": "^0.25.5",
