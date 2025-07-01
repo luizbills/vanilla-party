@@ -6,8 +6,6 @@
 
 </div>
 
-## Easy Multiplayer JavaScript Games
-
 _Vanilla Party_ is a library for easily prototyping online multi-user apps with JavaScript. Quickly test ideas for multiplayer games, realtime multi-user apps, and multi-computer projects.
 
 [Documentation](docs)
