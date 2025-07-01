@@ -38,9 +38,13 @@ Projects built with _Vanilla Party_ are insecure and has no method to authentica
 
 ## Features
 
-**Shared Data Objects**
+**No Server-Side Code**
 
-With _Vanilla Party_ you can easily create a shared data object that is automatically synchronized between instances of your sketch. You can assign and read properties on these objects just like a plain old local javascript object.
+With _Vanilla Party_ your projects are written using only client-side JavaScript. Quickly try ideas without writing server code or setting up a back-end stack.
+
+**Real-time Data Sync**
+
+With _Vanilla Party_ you can easily create a shared data object that is automatically synchronized between instances of your project. You can assign and read properties on these objects just like a plain old local javascript object.
 
 **Multiple Apps and Rooms**
 
@@ -48,7 +52,7 @@ A single _Vanilla Party_ server can support many apps and each app can group use
 
 **Client-side Hosting**
 
-_Vanilla Party_ automatically designates one (and only one) guest in each room as the host. Your code can easily check if it is the host and take care of running the party. This lets you avoid writing server-side code and makes prototyping faster.
+_Vanilla Party_ automatically designates one (and only one) guest in each room as the host. Your code can easily check if it is the host and take care of running the party.
 
 ## Installation and Quickstart
 
@@ -119,7 +123,9 @@ window.addEventListener("load", () => {
 
 ## Server Installation
 
-_Vanilla Party_ need to connect to a server (a [deepstream.io](https://deepstream.io) instance) in order to synchronize their data. You don’t necessarily need to set up your own server. You can get started with our demo server.
+_Vanilla Party_ need to connect to a server (a [deepstream.io](https://deepstream.io) instance) in order to synchronize their data. 
+
+You don’t necessarily need to set up your own server. Get started with our demo server: `wss://vanilla-party.luizbills.com`
 
 But you can set up your own server in a few minutes on Heroku following this [guide](https://www.notion.so/Server-Setup-d039a4be3a044878bd5ad0931f1c93bd).
 
