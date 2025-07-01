@@ -1,9 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// declare let p5: any;
-
 import { JSONObject, UserData } from "./validate"
 import { SubscriptionCallback } from "@deepstream/client/dist/src/record/record"
 
@@ -48,8 +42,8 @@ const partyConnect = function (
       false
     )
 
-    // install p5PartyEvents
-    room.subscribe("p5PartyEvent", (data: JSONObject) => {
+    // install partyEvents
+    room.subscribe("partyEvent", (data: JSONObject) => {
       // function handleAction() {
       if (!room) return
 
@@ -58,7 +52,7 @@ const partyConnect = function (
         data.action === "reload-others" &&
         data.sender != room.info().guestName
       ) {
-        log.log("Recieved reload-others p5PartyEvent. Reloading...")
+        log.log("Recieved reload-others partyEvent. Reloading...")
         window.location.reload()
       }
 
@@ -67,7 +61,7 @@ const partyConnect = function (
         data.action === "disconnect-others" &&
         data.sender != room.info().guestName
       ) {
-        log.log("Recieved disconnect-others p5PartyEvent. Disconnecting...")
+        log.log("Recieved disconnect-others partyEvent. Disconnecting...")
         room.disconnect()
         void createInfo(room)
       }
@@ -82,29 +76,7 @@ const partyConnect = function (
   void load()
 }
 
-/// experimental auto reload
-/**
-      EXPERIMENTAL FEATURE: Auto reloading When developing a sketch that uses
-      p5.party, it is usually best to have all connected clients reload when the
-      code changes.
-
-      When working in VS Code with Live Server, saving the code auto reloads all
-      local browser tabs running the code, which is usually good enough. When
-      working with the p5 web editor saving the code will reload the sketch in
-      the same tab, but not in other tabs/windows.
-
-      This feature is intended to make working in the p5 web editor (or similar
-      environments) easier by reloaded all other connected clients when the
-      "primary" client reloads.
-
-      To use this you would open the info panel (ctrl-i) and enable the "auto"
-      checkbox. When enabled, reloading the tab will send a message to all other
-      connected clients to reload.
-
-      Reloading happens immediately after the "auto" guest connects, making the
-      "auto" guest the host before it's setup() is called.
-      */
-
+/// partyDisconnect
 const partyDisconnect = function () {
   if (room === null) {
     log.error("partyDisconnect() called before partyConnect()")
@@ -114,7 +86,6 @@ const partyDisconnect = function () {
 }
 
 /// partyLoadShared (preload)
-
 const partyLoadShared = function (
   name: string,
   initObject?: UserData,
@@ -141,7 +112,6 @@ const partyLoadShared = function (
 }
 
 /// partyLoadMyShared
-
 const partyLoadMyShared = function (
   initObject = {},
   cb?: (shared: JSONObject) => void
@@ -167,7 +137,6 @@ const partyLoadMyShared = function (
 }
 
 /// partyLoadGuestShareds
-
 const partyLoadGuestShareds = function () {
   if (room === null) {
     log.error("partyLoadGuestShareds() called before partyConnect()")

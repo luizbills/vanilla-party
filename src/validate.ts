@@ -142,7 +142,7 @@ function validateJSONValue(value: UserData, path = ""): boolean {
   }
   validationError = {
     path,
-    message: `is an unknown type. p5.party doesn't know what to do with it.`,
+    message: `is an unknown type. vanilla-party doesn't know what to do with it.`,
   }
 
   // if we got this far, we don't know what it is
