@@ -5,9 +5,10 @@
   "license": "MIT",
   "description": "An easy to use library for simple multi-user JavaScript apps.",
   "keywords": [
-    "multiuser",
     "multiplayer",
-    "library"
+    "library",
+    "network",
+    "multiuser"
   ],
   "repository": {
     "type": "git",
@@ -17,23 +18,25 @@
     "src",
     "dist"
   ],
-  "main": "dist/vanilla-party.js",
+  "main": "dist/vanilla-party.mjs",
   "unpkg": "./dist/vanilla-party.js",
   "engines": {
     "node": "^22"
   },
   "packageManager": "bun@1.2.0",
   "scripts": {
-    "dev": "npm run esbuild -- --outfile=samples/_dist/vanilla-party.js --servedir=samples",
-    "start": "npm run esbuild -- --watch --outfile=public/dist/vanilla-party.js ",
-    "test": "jest --coverage=false",
+    "start": "npm run esbuild -- src/web.ts --watch --outfile=samples/dist/vanilla-party.js --servedir=samples",
+    "dev": "npm run start",
+    "test": "jest",
     "release": "np",
     "serve": "PORT=${PORT:-6020} deepstream start",
-    "build": "npm run esbuild -- --outfile=dist/vanilla-party.js",
+    "build:module": "npm run esbuild -- src/index.ts --format=esm --minify --outfile=dist/vanilla-party.mjs ",
+    "build:web": "npm run esbuild -- src/web.ts --minify --outfile=dist/vanilla-party.js ",
+    "build": "npm run build:module && npm run build:web",
     "prepare": "npm run genversion && npm run build",
     "postpublish": "curl https://purge.jsdelivr.net/npm/vanilla-party@latest/dist/vanilla-party.js",
     "genversion": "genversion --es6 --semi version.js",
-    "esbuild": "esbuild src/web.ts --bundle --sourcemap --minify --target=es6 --define:global=window --inject:esbuild.inject.js --loader:.css=text"
+    "esbuild": "esbuild --bundle --sourcemap --target=es6 --define:global=window --inject:esbuild.inject.js --loader:.css=text"
   },
   "dependencies": {
     "@deepstream/client": "^7.0.5",
