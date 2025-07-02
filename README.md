@@ -56,6 +56,8 @@ _Vanilla Party_ automatically designates one (and only one) guest in each room a
 
 The quickest way to get started with _Vanilla Party_ is to load or download from a [CDN](https://unpkg.com/vanilla-party@latest/dist/vanilla-party.js).
 
+Or install via NPM using **`npm install vanilla-party`**.
+
 ## Usage
 
 ```html
@@ -121,7 +123,7 @@ window.addEventListener("load", () => {
 
 ## Server Installation
 
-_Vanilla Party_ need to connect to a server (a [deepstream.io](https://deepstream.io) instance) in order to synchronize their data. 
+_Vanilla Party_ need to connect to a server (a [deepstream.io](https://deepstream.io) instance) in order to synchronize their data.
 
 You don’t necessarily need to set up your own server. Get started with our demo server: `wss://vanilla-party.luizbills.com`
 
