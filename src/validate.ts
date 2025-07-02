@@ -140,6 +140,7 @@ function validateJSONValue(value: UserData, path = ""): boolean {
     // allow it, key should be removed
     return true
   }
+
   validationError = {
     path,
     message: `is an unknown type. vanilla-party doesn't know what to do with it.`,

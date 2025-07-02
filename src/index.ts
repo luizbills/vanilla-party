@@ -11,14 +11,13 @@ log.styled("font-weight: bold", `Vanilla Party v${version}`)
 
 let room: Room | null = null
 
-/// partyConnect (preload)
-
-const partyConnect = function (
+/// partyConnect
+export const partyConnect = (
   host: string,
   appName: string,
   roomName = "main",
   cb?: () => void
-) {
+) => {
   if (room !== null) {
     log.warn("You should call partyConnect() only one time")
     return
@@ -77,7 +76,7 @@ const partyConnect = function (
 }
 
 /// partyDisconnect
-const partyDisconnect = function () {
+export const partyDisconnect = () => {
   if (room === null) {
     log.error("partyDisconnect() called before partyConnect()")
     return
@@ -85,12 +84,12 @@ const partyDisconnect = function () {
   room.disconnect()
 }
 
-/// partyLoadShared (preload)
-const partyLoadShared = function (
+/// partyLoadShared
+export const partyLoadShared = (
   name: string,
   initObject?: UserData,
   cb?: (shared: JSONObject) => void
-): JSONObject | undefined {
+): JSONObject | undefined => {
   if (room === null) {
     log.error("partyLoadShared() called before partyConnect()")
     return undefined
@@ -112,7 +111,7 @@ const partyLoadShared = function (
 }
 
 /// partyLoadMyShared
-const partyLoadMyShared = function (
+export const partyLoadMyShared = function (
   initObject = {},
   cb?: (shared: JSONObject) => void
 ) {
@@ -137,7 +136,7 @@ const partyLoadMyShared = function (
 }
 
 /// partyLoadGuestShareds
-const partyLoadGuestShareds = function () {
+export const partyLoadGuestShareds = function () {
   if (room === null) {
     log.error("partyLoadGuestShareds() called before partyConnect()")
     return undefined
@@ -145,7 +144,7 @@ const partyLoadGuestShareds = function () {
   return room.guestShareds
 }
 
-const partyLoadParticipantShareds = function () {
+export const partyLoadParticipantShareds = function () {
   log.warn(
     "partyLoadParticipantShareds is deprecated. Use partyLoadGuestShareds instead."
   )
@@ -157,8 +156,7 @@ const partyLoadParticipantShareds = function () {
 }
 
 /// partyIsHost
-
-const partyIsHost = function (): boolean {
+export const partyIsHost = function (): boolean {
   if (room === null) {
     log.error("partyIsHost() called before partyConnect()")
     return false
@@ -167,8 +165,10 @@ const partyIsHost = function (): boolean {
 }
 
 /// partySetShared
-
-const partySetShared = function (shared: JSONObject, object: JSONObject): void {
+export const partySetShared = function (
+  shared: JSONObject,
+  object: JSONObject
+): void {
   if (!Record.recordForShared(shared)) {
     log.warn(
       "partySetShared() doesn't recognize the provided shared object.",
@@ -180,8 +180,7 @@ const partySetShared = function (shared: JSONObject, object: JSONObject): void {
 }
 
 /// partyWatchShared
-
-const partyWatchShared = function (
+export const partyWatchShared = function (
   shared: JSONObject,
   a: any,
   b: any,
@@ -194,13 +193,11 @@ const partyWatchShared = function (
     )
     return
   }
-
-  /* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */
   Record.recordForShared(shared)?.watchShared(a, b, c)
 }
 
 /// partySubscribe
-const partySubscribe = function (
+export const partySubscribe = function (
   event: string,
   cb: SubscriptionCallback
 ): void {
@@ -212,7 +209,7 @@ const partySubscribe = function (
 }
 
 /// partyUnsubscribe
-const partyUnsubscribe = function (
+export const partyUnsubscribe = function (
   event: string,
   cb?: SubscriptionCallback
 ): void {
@@ -224,7 +221,7 @@ const partyUnsubscribe = function (
 }
 
 /// partyEmit
-const partyEmit = function (event: string, data?: UserData): void {
+export const partyEmit = function (event: string, data?: UserData): void {
   if (room === null) {
     log.error("partyEmit() called before partyConnect()")
     return
@@ -233,7 +230,7 @@ const partyEmit = function (event: string, data?: UserData): void {
 }
 
 let isInfoShown = false
-const partyToggleInfo = function (show?: boolean) {
+export const partyToggleInfo = function (show?: boolean) {
   if (room === null) {
     log.error("partyToggleInfo() called before partyConnect()")
     return
@@ -247,22 +244,3 @@ const partyToggleInfo = function (show?: boolean) {
     destroyInfo()
   }
 }
-
-Object.assign(window, {
-  Room,
-  Record,
-  partyConnect,
-  partyDisconnect,
-  partyEmit,
-  partyIsHost,
-  partyLoadGuestShareds,
-  partyLoadMyShared,
-  partyLoadParticipantShareds,
-  partyLoadShared,
-  partySetShared,
-  partySubscribe,
-  partyToggleInfo,
-  partyUnsubscribe,
-  partyWatchShared,
-  partyLog: log,
-})
