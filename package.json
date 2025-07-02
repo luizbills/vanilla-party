@@ -17,7 +17,7 @@
     "src",
     "dist"
   ],
-  "main": "dist/index.js",
+  "main": "dist/vanilla-party.js",
   "unpkg": "./dist/vanilla-party.js",
   "engines": {
     "node": "22"
