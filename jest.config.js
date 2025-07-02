@@ -1,5 +1,5 @@
 /* global module */
-const config = {
+export default {
   preset: "ts-jest/presets/js-with-ts",
   testEnvironment: "jsdom", // requires jest-environment-jsdom
   collectCoverage: true,
@@ -8,5 +8,4 @@ const config = {
   transformIgnorePatterns: ["/node_modules/(?!(on-change)/)"],
 
   testRegex: "((\\.|/*.)(test))\\.[jt]sx?$",
-};
-module.exports = config;
+}
