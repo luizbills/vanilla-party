@@ -1,6 +1,6 @@
 {
   "name": "vanilla-party",
-  "version": "0.4.0",
+  "version": "0.3.0",
   "author": "Luiz Bills",
   "license": "MIT",
   "description": "An easy to use library for simple multi-user JavaScript apps.",
@@ -27,7 +27,7 @@
   "scripts": {
     "start": "npm run esbuild -- src/web.ts --watch --outfile=samples/dist/vanilla-party.js --servedir=samples",
     "dev": "npm run start",
-    "test": "jest",
+    "test": "jest --coverage=false",
     "release": "np",
     "serve": "PORT=${PORT:-6020} deepstream start",
     "build:module": "npm run esbuild -- src/index.ts --format=esm --minify --outfile=dist/vanilla-party.mjs ",
