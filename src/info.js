@@ -36,14 +36,11 @@ export async function createInfo(room) {
         <div>${isHost ? "hosting" : ""}</div>
         <button data-party="reload-others">reload others</button>
         <button data-party="disconnect-others">disconnect others</button>
-
-        <a href="https://www.notion.so/justinbakse/The-Info-Panel-193b1bb21cec80aaafd8f341f044b3fc">?</a>
-        `
+        <a href="https://www.notion.so/justinbakse/The-Info-Panel-193b1bb21cec80aaafd8f341f044b3fc">?</a>`
     } else {
       return `
         <style>${infoCss}</style>
-        <div class="error">disconnected</div>
-        `
+        <div class="error">disconnected</div>`
     }
   }
 

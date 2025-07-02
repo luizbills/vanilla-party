@@ -1,78 +1,78 @@
-import onChange from "on-change";
+import onChange from "on-change"
 
-import { DeepstreamClient } from "@deepstream/client";
-import { CONNECTION_STATE } from "@deepstream/client/dist/src/constants";
-import { Record as DSRecord } from "@deepstream/client/dist/src/record/record";
+import { DeepstreamClient } from "@deepstream/client"
+import { CONNECTION_STATE } from "@deepstream/client/dist/src/constants"
+import { Record as DSRecord } from "@deepstream/client/dist/src/record/record"
 
-import * as log from "./log";
+import * as log from "./log"
 
-import { SubscriptionCallback } from "./validate";
-import { UserData, JSONValue, JSONObject, RecordData } from "./validate";
-import { isJSONValue, isJSONObject, isEmpty } from "./validate";
+import { SubscriptionCallback } from "./validate"
+import { UserData, JSONValue, JSONObject, RecordData } from "./validate"
+import { isJSONValue, isJSONObject, isEmpty } from "./validate"
 
-import { patchInPlace } from "./patch";
+import { patchInPlace } from "./patch"
 
-type SharedObject = JSONObject;
+type SharedObject = JSONObject
 
-const sharedRecordLookup = new WeakMap<SharedObject, Record>();
+const sharedRecordLookup = new WeakMap<SharedObject, Record>()
 
 export class Record {
-  readonly #ds: DeepstreamClient;
-  readonly #name: string;
-  #dsRecord: DSRecord | null;
-  #shared: SharedObject;
-  #watchedShared: SharedObject;
-  #whenLoaded: Promise<void> | null;
+  readonly #ds: DeepstreamClient
+  readonly #name: string
+  #dsRecord: DSRecord | null
+  #shared: SharedObject
+  #watchedShared: SharedObject
+  #whenLoaded: Promise<void> | null
 
   constructor(ds: DeepstreamClient, name: string) {
-    this.#ds = ds;
-    this.#name = name;
-    this.#dsRecord = null;
-    this.#shared = {};
+    this.#ds = ds
+    this.#name = name
+    this.#dsRecord = null
+    this.#shared = {}
     this.#watchedShared = onChange(
       this.#shared,
       this.#onClientChangeData.bind(this),
       {
         onValidate: this.#onClientValidateData.bind(this),
       }
-    );
-    this.#whenLoaded = null;
+    )
+    this.#whenLoaded = null
 
-    sharedRecordLookup.set(this.#shared, this);
+    sharedRecordLookup.set(this.#shared, this)
   }
 
   async load(initObject?: UserData, overwrite = false): Promise<void> {
     if (this.#whenLoaded) {
-      log.warn("Record.load() called twice!", this.#name);
-      return this.#whenLoaded;
+      log.warn("Record.load() called twice!", this.#name)
+      return this.#whenLoaded
     }
 
     if (this.#ds.getConnectionState() !== CONNECTION_STATE.OPEN) {
       // "OPEN"
-      log.error("Record.load() called before room is connected.", this.#name);
-      return;
+      log.error("Record.load() called before room is connected.", this.#name)
+      return
     }
 
     const innerLoad = async () => {
-      this.#dsRecord = this.#ds.record.getRecord(this.#name);
-      this.#dsRecord.subscribe(this.#onServerChangeData.bind(this), true);
-      await this.#dsRecord.whenReady();
-      if (!initObject) return;
-      await this.initData(initObject, overwrite);
-    };
+      this.#dsRecord = this.#ds.record.getRecord(this.#name)
+      this.#dsRecord.subscribe(this.#onServerChangeData.bind(this), true)
+      await this.#dsRecord.whenReady()
+      if (!initObject) return
+      await this.initData(initObject, overwrite)
+    }
 
-    this.#whenLoaded = innerLoad();
-    return this.#whenLoaded;
+    this.#whenLoaded = innerLoad()
+    return this.#whenLoaded
   }
 
   get whenLoaded(): Promise<void> {
     if (this.#whenLoaded === null) {
-      log.error("Record.whenLoaded called before load().", this.#name);
+      log.error("Record.whenLoaded called before load().", this.#name)
       return Promise.reject(
         new Error("Record.whenLoaded called before load().")
-      );
+      )
     }
-    return this.#whenLoaded;
+    return this.#whenLoaded
   }
 
   /**
@@ -83,16 +83,16 @@ export class Record {
 
   async initData(data: UserData, overwrite = false): Promise<void> {
     if (!this.#dsRecord?.isReady) {
-      log.error("Record.initData() called before record ready.", this.#name);
-      return;
+      log.error("Record.initData() called before record ready.", this.#name)
+      return
     }
 
     // if (!data) return;
-    if (!overwrite && !isEmpty(this.#dsRecord.get())) return; // don't overwrite existing data
-    if (!isJSONObject(data, "init-data")) return; // don't try to write bad data
+    if (!overwrite && !isEmpty(this.#dsRecord.get())) return // don't overwrite existing data
+    if (!isJSONObject(data, "init-data")) return // don't try to write bad data
 
     // todo: allow but warn non-owner writes
-    await this.#dsRecord.setWithAck(data);
+    await this.#dsRecord.setWithAck(data)
   }
 
   setData(data: UserData): void {
@@ -103,21 +103,21 @@ export class Record {
           this.#name
         }\n Ignored: ${JSON.stringify(data)}`
       );
-      return;
+      return
     }
-    if (!isJSONObject(data, "set-data")) return; // don't try to write bad data
+    if (!isJSONObject(data, "set-data")) return // don't try to write bad data
 
     // todo: allow but warn non-owner writes
-    this.#dsRecord.set(data);
+    this.#dsRecord.set(data)
   }
 
-  watchShared(callback: SubscriptionCallback, triggerNow?: boolean): void;
+  watchShared(callback: SubscriptionCallback, triggerNow?: boolean): void
 
   watchShared(
     path: string,
     callback: SubscriptionCallback,
     triggerNow?: boolean
-  ): void;
+  ): void
 
   watchShared(
     path: string | SubscriptionCallback,
@@ -125,41 +125,41 @@ export class Record {
     triggerNow?: boolean
   ): void {
     if (!this.#dsRecord?.isReady) {
-      log.warn(`watchShared() called on '${this.#name}' before ready.`);
-      return;
+      log.warn(`watchShared() called on '${this.#name}' before ready.`)
+      return
     }
 
     // @ts-expect-error subscribe overload signatures DO match watchShared
-    this.#dsRecord.subscribe(path, cb, triggerNow);
+    this.#dsRecord.subscribe(path, cb, triggerNow)
   }
 
   get shared(): JSONObject {
-    return this.#watchedShared;
+    return this.#watchedShared
   }
 
   get name(): string {
-    return this.#name;
+    return this.#name
   }
 
   async delete() {
     if (!this.#dsRecord?.isReady) {
-      log.error(`delete() called on ${this.#name} before ready.`);
-      return;
+      log.error(`delete() called on ${this.#name} before ready.`)
+      return
     }
 
     return new Promise((resolve) => {
-      this.#dsRecord?.once("delete", resolve);
-      void this.#dsRecord?.delete();
-    });
+      this.#dsRecord?.once("delete", resolve)
+      void this.#dsRecord?.delete()
+    })
   }
 
   async _set(path: string, value: JSONValue) {
     // value `as RecordData` because all JSONValues ARE supported
-    await this.#dsRecord?.setWithAck(path, value as RecordData);
+    await this.#dsRecord?.setWithAck(path, value as RecordData)
   }
 
   _get(key?: string): JSONValue {
-    return this.#dsRecord?.get(key) as JSONValue;
+    return this.#dsRecord?.get(key) as JSONValue
   }
 
   #onClientValidateData(
@@ -167,7 +167,7 @@ export class Record {
     newValue: UserData,
     oldValue: UserData
   ): boolean {
-    return isJSONValue(newValue, `${this.#name}/${path}`);
+    return isJSONValue(newValue, `${this.#name}/${path}`)
   }
 
   #onClientChangeData(
@@ -182,7 +182,7 @@ export class Record {
           this.#name
         }\n Ignored: ${path} = ${JSON.stringify(newValue)}`
       );
-      return;
+      return
     }
     //! experimental
     // function get(obj: JSONValue, path: string) {
@@ -212,26 +212,26 @@ export class Record {
     // todo: warn and allow non-owner writes
 
     // `as JSONValue` because newValue validated in onClientValidateData
-    void this._set(path, newValue as JSONValue);
+    void this._set(path, newValue as JSONValue)
   }
 
   #onServerChangeData(data: JSONObject): void {
     /* istanbul ignore next */ // the server should never be sending this
     if (!isJSONObject(data, "server-data")) {
-      log.error(`Incoming server data not valid.`);
+      log.error(`Incoming server data not valid.`)
     }
     // don't replace #shared itself as #watchedShared has a reference to it
     // instead patch it to match the incoming data
-    patchInPlace(this.#shared, data, "shared");
+    patchInPlace(this.#shared, data, "shared")
   }
 
   static recordForShared(watchedShared: JSONObject): Record | undefined {
-    const shared = onChange.target(watchedShared);
+    const shared = onChange.target(watchedShared)
 
     if (!sharedRecordLookup.has(shared)) {
-      log.error(`No record found for shared object.`);
-      return undefined;
+      log.error(`No record found for shared object.`)
+      return undefined
     }
-    return sharedRecordLookup.get(shared);
+    return sharedRecordLookup.get(shared)
   }
 }

@@ -1,5 +1,5 @@
-import { JSONObject, JSONValue } from "./validate";
-import * as log from "./log";
+import { JSONObject, JSONValue } from "./validate"
+import * as log from "./log"
 
 /**
  * patches _old to deep equal _new
@@ -16,26 +16,26 @@ export function patchInPlace(
   path = ""
 ): void {
   if (typeof oldObject !== "object") {
-    log.error("_old is not an object");
-    return;
+    log.error("_old is not an object")
+    return
   }
   if (typeof newObject !== "object") {
-    log.error("_new is not an object");
-    return;
+    log.error("_new is not an object")
+    return
   }
 
-  const oldKeys = Object.keys(oldObject).reverse();
-  const newKeys = Object.keys(newObject);
+  const oldKeys = Object.keys(oldObject).reverse()
+  const newKeys = Object.keys(newObject)
 
   // remove oldObject keys that are not in newObject
   for (const key of oldKeys) {
     if (!Object.prototype.hasOwnProperty.call(newObject, key)) {
       // log.debug(`remove ${_keyPath}.${key}`);
       if (Array.isArray(oldObject)) {
-        oldObject.splice(parseInt(key), 1);
+        oldObject.splice(parseInt(key), 1)
       } else {
         // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-        delete oldObject[key];
+        delete oldObject[key]
       }
     }
   }
@@ -44,22 +44,22 @@ export function patchInPlace(
   for (const key of newKeys) {
     if (!Object.prototype.hasOwnProperty.call(oldObject, key)) {
       // log.debug(`add ${_keyPath}.${key}`);
-      oldObject[key] = newObject[key];
+      oldObject[key] = newObject[key]
     }
   }
 
   // patch shared object and array keys
   for (const key of newKeys) {
     if (Object.prototype.hasOwnProperty.call(oldObject, key)) {
-      const oldType = getMergeType(oldObject[key]);
-      const newType = getMergeType(newObject[key]);
+      const oldType = getMergeType(oldObject[key])
+      const newType = getMergeType(newObject[key])
 
       // bail if type is unsupported
       if (newType === "unsupported") {
         log.error(
           `${path}.${key} is unsupported type: ${typeof newObject[key]}`
-        );
-        continue;
+        )
+        continue
       }
 
       // merge objects
@@ -69,8 +69,8 @@ export function patchInPlace(
           oldObject[key] as JSONObject,
           newObject[key] as JSONObject,
           `${path}.${key}`
-        );
-        continue;
+        )
+        continue
       }
 
       // merge arrays
@@ -81,13 +81,13 @@ export function patchInPlace(
           oldObject[key] as JSONObject,
           newObject[key] as JSONObject,
           `${path}.${key}`
-        );
-        continue;
+        )
+        continue
       }
 
       // replace everything else
       if (oldObject[key] !== newObject[key]) {
-        oldObject[key] = newObject[key];
+        oldObject[key] = newObject[key]
       }
     }
   }
@@ -95,11 +95,11 @@ export function patchInPlace(
 
 // module.exports = { patchInPlace };
 function getMergeType(value: JSONValue): string {
-  if (value === null) return "null";
-  if (Array.isArray(value)) return "array";
-  if (typeof value === "object") return "object";
-  if (typeof value === "boolean") return "primitive";
-  if (typeof value === "number" && Number.isFinite(value)) return "primitive";
-  if (typeof value === "string") return "primitive";
-  return "unsupported";
+  if (value === null) return "null"
+  if (Array.isArray(value)) return "array"
+  if (typeof value === "object") return "object"
+  if (typeof value === "boolean") return "primitive"
+  if (typeof value === "number" && Number.isFinite(value)) return "primitive"
+  if (typeof value === "string") return "primitive"
+  return "unsupported"
 }
