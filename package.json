@@ -14,16 +14,17 @@
     "type": "git",
     "url": "https://github.com/luizbills/vanilla-party.git"
   },
-  "files": [
-    "src",
-    "dist"
-  ],
+  "type": "module",
   "main": "dist/vanilla-party.mjs",
   "unpkg": "./dist/vanilla-party.js",
   "engines": {
     "node": "^22"
   },
   "packageManager": "bun@1.2.0",
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
     "start": "npm run esbuild -- src/web.ts --watch --outfile=samples/dist/vanilla-party.js --servedir=samples",
     "dev": "npm run start",
