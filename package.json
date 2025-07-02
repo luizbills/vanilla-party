@@ -20,8 +20,9 @@
   "main": "dist/vanilla-party.js",
   "unpkg": "./dist/vanilla-party.js",
   "engines": {
-    "node": "22"
+    "node": "^22"
   },
+  "packageManager": "bun@1.2.0",
   "scripts": {
     "dev": "npm run esbuild -- --outfile=samples/_dist/vanilla-party.js --servedir=samples",
     "start": "npm run esbuild -- --watch --outfile=public/dist/vanilla-party.js ",

@@ -77,7 +77,7 @@ export const partyConnect = (
 
 /// partyDisconnect
 export const partyDisconnect = () => {
-  if (room === null) {
+  if (!room) {
     log.error("partyDisconnect() called before partyConnect()")
     return
   }
@@ -90,7 +90,7 @@ export const partyLoadShared = (
   initObject?: UserData,
   cb?: (shared: JSONObject) => void
 ): JSONObject | undefined => {
-  if (room === null) {
+  if (!room) {
     log.error("partyLoadShared() called before partyConnect()")
     return undefined
   }
@@ -115,7 +115,7 @@ export const partyLoadMyShared = function (
   initObject = {},
   cb?: (shared: JSONObject) => void
 ) {
-  if (room === null) {
+  if (!room) {
     log.error("partyLoadMyShared() called before partyConnect()")
     return undefined
   }
@@ -137,7 +137,7 @@ export const partyLoadMyShared = function (
 
 /// partyLoadGuestShareds
 export const partyLoadGuestShareds = function () {
-  if (room === null) {
+  if (!room) {
     log.error("partyLoadGuestShareds() called before partyConnect()")
     return undefined
   }
@@ -148,7 +148,7 @@ export const partyLoadParticipantShareds = function () {
   log.warn(
     "partyLoadParticipantShareds is deprecated. Use partyLoadGuestShareds instead."
   )
-  if (room === null) {
+  if (!room) {
     log.error("partyLoadParticipantShareds() called before partyConnect()")
     return undefined
   }
@@ -157,7 +157,7 @@ export const partyLoadParticipantShareds = function () {
 
 /// partyIsHost
 export const partyIsHost = function (): boolean {
-  if (room === null) {
+  if (!room) {
     log.error("partyIsHost() called before partyConnect()")
     return false
   }
@@ -197,11 +197,11 @@ export const partyWatchShared = function (
 }
 
 /// partySubscribe
-export const partySubscribe = function (
+export const partySubscribe = (
   event: string,
   cb: SubscriptionCallback
-): void {
-  if (room === null) {
+): void => {
+  if (!room) {
     log.error("partySubscribe() called before partyConnect()")
     return
   }
@@ -209,11 +209,11 @@ export const partySubscribe = function (
 }
 
 /// partyUnsubscribe
-export const partyUnsubscribe = function (
+export const partyUnsubscribe = (
   event: string,
   cb?: SubscriptionCallback
-): void {
-  if (room === null) {
+): void => {
+  if (!room) {
     log.error("partyUnsubscribe() called before partyConnect()")
     return
   }
@@ -221,8 +221,8 @@ export const partyUnsubscribe = function (
 }
 
 /// partyEmit
-export const partyEmit = function (event: string, data?: UserData): void {
-  if (room === null) {
+export const partyEmit = (event: string, data?: UserData): void => {
+  if (!room) {
     log.error("partyEmit() called before partyConnect()")
     return
   }
@@ -230,8 +230,9 @@ export const partyEmit = function (event: string, data?: UserData): void {
 }
 
 let isInfoShown = false
-export const partyToggleInfo = function (show?: boolean) {
-  if (room === null) {
+/// partyToggleInfo
+export const partyToggleInfo = (show?: boolean) => {
+  if (!room) {
     log.error("partyToggleInfo() called before partyConnect()")
     return
   }
@@ -244,3 +245,13 @@ export const partyToggleInfo = function (show?: boolean) {
     destroyInfo()
   }
 }
+
+/// partyGetRoom
+export const partyGetRoom = () => {
+  if (!room) {
+    log.error("partyGetRoom() called before partyConnect()")
+  }
+  return room
+}
+
+export { Room as PartyRoom, Record as PartyRecord }
