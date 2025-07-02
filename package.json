@@ -41,7 +41,7 @@
     "buffer": "^6.0.3"
   },
   "devDependencies": {
-    "@deepstream/server": "^9.1.1",
+    "@deepstream/server": "^9.1.2",
     "@types/jest": "^29.5.14",
     "@types/reefjs": "^7.6.5",
     "esbuild": "^0.25.5",
