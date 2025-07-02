@@ -2,7 +2,7 @@
 
 # Vanilla Party
 
-[![NPM](https://flat.badgen.net/npm/v/vanilla-party?scale=1.5&label=NPM&color=blue&cache=3600)](https://npmjs.com/vanilla-party)
+[![NPM](https://flat.badgen.net/npm/v/vanilla-party?scale=1.25&label=NPM&color=blue&cache=60)](https://npmjs.com/vanilla-party)
 
 </div>
 
