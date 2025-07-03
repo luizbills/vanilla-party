@@ -143,6 +143,10 @@ export class Room {
     return this.#hostName === this.#guestName
   }
 
+  #updateHost() {
+    this.#hostName = this.#guestNames[0]
+  }
+
   async #updateGuestNames(): Promise<void> {
     const everyone = await this.#ds.presence.getAll()
 
@@ -150,7 +154,8 @@ export class Room {
       .filter((guestName) => guestName.startsWith(`${this.#roomId}/`))
       .concat(this.#guestName)
       .sort()
-    this.#hostName = this.#guestNames[0]
+
+    this.#updateHost()
   }
 
   #onPresence(username: string, isLoggedIn: boolean): void {
@@ -166,8 +171,7 @@ export class Room {
       )
     }
 
-    // update host
-    this.#hostName = this.#guestNames[0]
+    this.#updateHost()
 
     // update guest shareds
     this.#updateGuestShareds()

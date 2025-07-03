@@ -157,6 +157,15 @@ export const partyWatchShared = (
   Record.recordForShared(shared)?.watchShared(a, b, c)
 }
 
+/// partyEmit
+export const partyEmit = (event: string, data?: UserData): void => {
+  if (!room) {
+    log.error("partyEmit() called before partyConnect()")
+    return
+  }
+  room.emit(event, data)
+}
+
 /// partySubscribe
 export const partySubscribe = (
   event: string,
@@ -179,15 +188,6 @@ export const partyUnsubscribe = (
     return
   }
   room.unsubscribe(event, cb)
-}
-
-/// partyEmit
-export const partyEmit = (event: string, data?: UserData): void => {
-  if (!room) {
-    log.error("partyEmit() called before partyConnect()")
-    return
-  }
-  room.emit(event, data)
 }
 
 /// partyGetRoom
