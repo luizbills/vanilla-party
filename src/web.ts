@@ -1,3 +1,3 @@
-import * as partyFunctions from "./index.js"
+import * as vanillaPartyLibrary from "./index.js"
 
-Object.assign(window, partyFunctions)
+Object.assign(window, vanillaPartyLibrary)
