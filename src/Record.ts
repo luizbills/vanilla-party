@@ -80,7 +80,6 @@ export class Record {
    *
    * @param data initial data to set on the record
    */
-
   async initData(data: UserData, overwrite = false): Promise<void> {
     if (!this.#dsRecord?.isReady) {
       log.error("Record.initData() called before record ready.", this.#name)

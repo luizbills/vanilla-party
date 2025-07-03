@@ -12,23 +12,23 @@ describe("Room", () => {
   it("connects", async () => {
     r = new Room(HOST, "test", "test")
     await r.whenConnected
-    expect(r._isConnected()).toBe(true)
+    expect(r.isConnected()).toBe(true)
   })
 
   it("double connects", async () => {
     await r.whenConnected
     await r.whenConnected // tripple even
-    expect(r._isConnected()).toBe(true)
+    expect(r.isConnected()).toBe(true)
   })
 
   it("disconnects", () => {
     r.disconnect()
-    expect(r._isConnected()).toBe(false)
+    expect(r.isConnected()).toBe(false)
   })
 
   it("double disconnects", () => {
     r.disconnect()
-    expect(r._isConnected()).toBe(false)
+    expect(r.isConnected()).toBe(false)
   })
 
   it("waits for whenConnected", async () => {
@@ -36,7 +36,7 @@ describe("Room", () => {
     void r2.whenConnected
     await r2.whenConnected // should wait
     await r2.whenConnected // should be instant
-    expect(r2._isConnected()).toBe(true)
+    expect(r2.isConnected()).toBe(true)
     r2.disconnect()
   })
 })
@@ -47,7 +47,7 @@ describe("getRecord", () => {
   beforeAll(async () => {
     r1 = new Room(HOST, "test", "test")
     await Promise.all([r1.whenConnected])
-    expect(r1._isConnected()).toBe(true)
+    expect(r1.isConnected()).toBe(true)
   })
 
   afterAll(() => {
@@ -72,9 +72,9 @@ describe("Subscribe + Emit", () => {
     r2 = new Room(HOST, "test", "test")
     r3 = new Room(HOST, "test", "test2")
     await Promise.all([r1.whenConnected, r2.whenConnected, r3.whenConnected])
-    expect(r1._isConnected()).toBe(true)
-    expect(r2._isConnected()).toBe(true)
-    expect(r3._isConnected()).toBe(true)
+    expect(r1.isConnected()).toBe(true)
+    expect(r2.isConnected()).toBe(true)
+    expect(r3.isConnected()).toBe(true)
   })
 
   afterAll(() => {
@@ -175,9 +175,9 @@ describe("Guests", () => {
     r3 = new Room(HOST, "test", "test2")
     await Promise.all([r1.whenConnected, r2.whenConnected, r3.whenConnected])
 
-    expect(r1._isConnected()).toBe(true)
-    expect(r2._isConnected()).toBe(true)
-    expect(r3._isConnected()).toBe(true)
+    expect(r1.isConnected()).toBe(true)
+    expect(r2.isConnected()).toBe(true)
+    expect(r3.isConnected()).toBe(true)
   })
 
   afterAll(() => {
@@ -304,9 +304,9 @@ describe("Host", () => {
     r2 = new Room(HOST, "test", "test")
     r3 = new Room(HOST, "test", "test2")
     await Promise.all([r1.whenConnected, r2.whenConnected, r3.whenConnected])
-    expect(r1._isConnected()).toBe(true)
-    expect(r2._isConnected()).toBe(true)
-    expect(r3._isConnected()).toBe(true)
+    expect(r1.isConnected()).toBe(true)
+    expect(r2.isConnected()).toBe(true)
+    expect(r3.isConnected()).toBe(true)
   })
 
   afterAll(() => {
