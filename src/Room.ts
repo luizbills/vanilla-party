@@ -63,7 +63,7 @@ export class Room {
     return innerConnect()
   }
 
-  _isConnected(): boolean {
+  isConnected(): boolean {
     return this.#ds.getConnectionState() === CONNECTION_STATE.OPEN
   }
 
@@ -72,7 +72,7 @@ export class Room {
   }
 
   disconnect() {
-    if (!this._isConnected()) return
+    if (!this.isConnected()) return
     this.#ds.close()
   }
 
@@ -82,7 +82,7 @@ export class Room {
       roomName: this.#roomName,
       guestNames: this.#guestNames,
       guestName: this.#guestName,
-      isConnected: this._isConnected(),
+      isConnected: this.isConnected(),
       isHost: this.isHost(),
     }
   }
