@@ -4,7 +4,7 @@ serverName: UUID
 # Show the deepstream logo on startup
 showLogo: true
 # Log messages with this level and above. Valid levels are 0 (DEBUG), 1 (INFO), 2 (WARN), 3 (ERROR), 4 (FATAL), 100(OFF)
-logLevel: 1
+logLevel: 0
 # Plugin startup timeout – deepstream init will fail if any plugins fail to emit a 'done' event within this timeout
 dependencyInitializationTimeout: 5000
 # Directory where all plugins reside
