@@ -190,6 +190,15 @@ export const partyUnsubscribe = (
   room.unsubscribe(event, cb)
 }
 
+/// partyCountGuests
+export const partyCountGuests = () => {
+  if (!room) {
+    log.error("partyCountGuests() called before partyConnect()")
+    return
+  }
+  return room.info().guestNames.length
+}
+
 /// partyGetRoom
 export const partyGetRoom = () => {
   if (!room) {
