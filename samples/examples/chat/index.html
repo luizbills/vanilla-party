@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.4;
+      }
+
+      #messages {
+        background-color: silver;
+        min-height: 10vh;
+        max-height: 50vh;
+        overflow-y: auto;
+        padding: 0.5rem;
+      }
+
+      #status {
+        color: tomato;
+        font-weight: bold;
+      }
+
+      form > * {
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="messages"></div>
+    <form>
+      <input
+        type="text"
+        disabled
+        maxlength="140"
+        placeholder="Your message..."
+      />
+      <button disabled>Send</button>
+    </form>
+    <div id="status">Connecting... please wait...</div>
+
+    <script src="/dist/vanilla-party.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
