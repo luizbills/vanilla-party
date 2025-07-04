@@ -45,7 +45,7 @@ function partyTrackPing(cb, interval = 1000) {
     if (data.sender === id) {
       setTimeout(emitPing, interval)
       const prev = currentPing
-      currentPing = performance.now() - data.time
+      currentPing = Math.round(performance.now() - data.time)
       cb(currentPing, prev)
     }
   }
