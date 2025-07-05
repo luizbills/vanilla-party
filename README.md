@@ -93,16 +93,16 @@ window.addEventListener("load", () => {
   div.textContent = `connecting...`
 
   function onSharedDataReady() {
-    const radius = 64
+    const size = 64
 
     div.textContent = ""
-    div.style.cssText = `width:${radius}px;height:${radius}px;background:red;border-radius:100%;position:absolute;`
+    div.style.cssText = `width:${size}px;height:${size}px;background:red;border-radius:100%;position:absolute;`
 
     window.addEventListener("click", (ev) => {
       // listen clicks and taps and
       // write shared data
-      shared.x = ev.clientX - radius / 2
-      shared.y = ev.clientY - radius / 2
+      shared.x = ev.clientX - size / 2
+      shared.y = ev.clientY - size / 2
     })
 
     function update() {
@@ -117,7 +117,7 @@ window.addEventListener("load", () => {
 })
 ```
 
-[JSFiddle Live Example](https://jsfiddle.net/p52q9Lf8/5/)
+[JSFiddle Live Example](https://jsfiddle.net/dov14mcw/)
 
 > Note: This example is using only javascript and HTML to illustrate how easy it is to get started with Vanilla Party. In our [examples](samples), we'll use P5.js for user interaction and rendering.
 
