@@ -38,11 +38,11 @@ export class Room {
 
   #connect(): Promise<void> {
     const innerConnect = async () => {
-      // subscribe to errors
-      /* istanbul ignore next */ // error reporting
-      this.#ds.on("error", (error: string, event: string, topic: string) =>
+      // subscribe to deepstream errors
+      this.#ds.on("error", (error: string, event: string, topic: string) => {
         log.error("ds error", error, event, topic)
-      )
+        this.emit("party:ds-error", { error, event, topic })
+      })
 
       // subscribe to ANY/ALL clients connect/disconnect on SERVER
       // (not limited to app / room)
