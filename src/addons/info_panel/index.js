@@ -35,7 +35,7 @@ export function partyToggleInfo(show) {
   isInfoShown = show ?? !isInfoShown
 
   if (isInfoShown) {
-    void createInfo(room)
+    createInfo(room)
   } else {
     destroyInfo()
   }
@@ -110,7 +110,7 @@ async function createInfo(room) {
       if (data.sender != room.info().guestName) {
         log.log("Recieved disconnect-others partyEvent. Disconnecting...")
         room.disconnect()
-        void createInfo(room)
+        createInfo(room)
       }
     })
   }
