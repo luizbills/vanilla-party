@@ -117,7 +117,7 @@ window.addEventListener("load", () => {
 })
 ```
 
-[JSFiddle Live Example](https://jsfiddle.net/dov14mcw/)
+[Live Demo](https://jsbin.com/sumohuxovi/edit?output) (Try in two browser windows at once)
 
 > Note: This example is using only javascript and HTML to illustrate how easy it is to get started with Vanilla Party. In our [examples](samples), we'll use P5.js for user interaction and rendering.
 
