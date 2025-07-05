@@ -148,7 +148,7 @@ export class Record {
 
     return new Promise((resolve) => {
       this.#dsRecord?.once("delete", resolve)
-      void this.#dsRecord?.delete()
+      this.#dsRecord?.delete()
     })
   }
 
@@ -211,7 +211,7 @@ export class Record {
     // todo: warn and allow non-owner writes
 
     // `as JSONValue` because newValue validated in onClientValidateData
-    void this._set(path, newValue as JSONValue)
+    this._set(path, newValue as JSONValue)
   }
 
   #onServerChangeData(data: JSONObject): void {

@@ -52,7 +52,7 @@ export class Room {
       await this.#ds.login({ username: this.#guestName })
 
       // load my guest record
-      void this.#myGuestRecord.load()
+      this.#myGuestRecord.load()
 
       // get room list and determine host
       await this.#updateGuestNames()
@@ -191,7 +191,7 @@ export class Room {
         // add my guest record
         this.#guestRecords.set(name, this.#myGuestRecord)
         // republish when record changes
-        void this.#myGuestRecord.whenLoaded.then(() => {
+        this.#myGuestRecord.whenLoaded.then(() => {
           this.#myGuestRecord.watchShared(
             updatePublishedGuestShareds.bind(this),
             true
@@ -202,7 +202,7 @@ export class Room {
         const r = new Record(this.#ds, name)
         this.#guestRecords.set(name, r)
         // republish when record changes
-        void r.load().then(() => {
+        r.load().then(() => {
           r.watchShared(updatePublishedGuestShareds.bind(this), true)
         })
       }

@@ -33,7 +33,6 @@ describe("Room", () => {
 
   it("waits for whenConnected", async () => {
     const r2 = new Room(HOST, "test", "test")
-    void r2.whenConnected
     await r2.whenConnected // should wait
     await r2.whenConnected // should be instant
     expect(r2.isConnected()).toBe(true)
@@ -203,7 +202,7 @@ describe("Guests", () => {
 describe("Guest Shareds", () => {
   it("local guestShareds contains my (immediate)", async () => {
     const r1 = new Room(HOST, "test", "test")
-    void r1.whenConnected
+
     const rec1 = r1.myGuestRecord
 
     await r1.whenConnected
@@ -221,7 +220,7 @@ describe("Guest Shareds", () => {
 
   it("remote guestShares contains my (immediate)", async () => {
     const r1 = new Room(HOST, "test", "test")
-    void r1.whenConnected
+
     const rec1 = r1.myGuestRecord
     await r1.whenConnected
     await rec1.whenLoaded

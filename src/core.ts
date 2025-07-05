@@ -33,7 +33,7 @@ export const partyConnect = (
     log.log("partyConnect() done!")
     cb?.()
   }
-  void load()
+  load()
 }
 
 /// partyDisconnect
@@ -53,7 +53,7 @@ export const partyLoadShared = (
 ): JSONObject | undefined => {
   if (!room) {
     log.error("partyLoadShared() called before partyConnect()")
-    return undefined
+    return
   }
   const record = room.getRecord(name)
 
@@ -66,7 +66,7 @@ export const partyLoadShared = (
     cb?.(record.shared)
   }
 
-  void load()
+  load()
 
   return record.shared
 }
@@ -78,7 +78,7 @@ export const partyLoadMyShared = (
 ) => {
   if (!room) {
     log.error("partyLoadMyShared() called before partyConnect()")
-    return undefined
+    return
   }
 
   const record = room.myGuestRecord
@@ -91,7 +91,7 @@ export const partyLoadMyShared = (
     cb?.(record.shared)
   }
 
-  void load()
+  load()
 
   return record.shared
 }
@@ -100,18 +100,7 @@ export const partyLoadMyShared = (
 export const partyLoadGuestShareds = () => {
   if (!room) {
     log.error("partyLoadGuestShareds() called before partyConnect()")
-    return undefined
-  }
-  return room.guestShareds
-}
-
-export const partyLoadParticipantShareds = function () {
-  log.warn(
-    "partyLoadParticipantShareds is deprecated. Use partyLoadGuestShareds instead."
-  )
-  if (!room) {
-    log.error("partyLoadParticipantShareds() called before partyConnect()")
-    return undefined
+    return
   }
   return room.guestShareds
 }
