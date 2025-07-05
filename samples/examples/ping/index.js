@@ -5,11 +5,10 @@ function setup() {
   // const url = "ws://0.0.0.0:6020"
   const url = "wss://vanilla-party.luizbills.com"
 
-  partyConnect(url, "test_ping", "main", () => {
-    // tracker = new PingTracker()
-    partyTrackPing((value) => {
-      ping = value
-    })
+  partyConnect(url, "test_ping", "main")
+
+  partyTrackPing((value) => {
+    ping = value
   })
 
   createCanvas(400, 400)
@@ -27,10 +26,21 @@ function draw() {
     50,
     50
   )
-  return
 }
 
-function partyTrackPing(cb, interval = 1000) {
+/**
+ * @param {(ping: number, oldPing: number) => void} cb
+ * @param {number} interval
+ */
+async function partyTrackPing(cb, interval = 1000) {
+  const room = partyGetRoom()
+  if (!room) {
+    console.error("partyTrackPing() called before partyConnect()")
+    return
+  }
+
+  await room.whenConnected
+
   const id = Math.random()
 
   let currentPing = 0
@@ -60,5 +70,5 @@ function partyTrackPing(cb, interval = 1000) {
   partySubscribe("ping", onPing)
   partySubscribe("pong", onPong)
 
-  setTimeout(emitPing, interval)
+  setTimeout(emitPing, 1000)
 }
