@@ -1,6 +1,6 @@
 {
   "name": "vanilla-party",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "Luiz Bills",
   "license": "MIT",
   "description": "An easy to use library for simple multi-user JavaScript apps.",
