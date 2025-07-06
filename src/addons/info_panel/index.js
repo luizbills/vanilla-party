@@ -87,11 +87,9 @@ async function createInfo(room) {
       if (!action) return
       const sender = room.info().guestName
       if (action === "reload-others") {
-        log.log("reload-others")
         room.emit("party:reload-others", { sender })
       }
       if (action === "disconnect-others") {
-        log.log("disconnect-others")
         room.emit("party:disconnect-others", { sender })
       }
     })
@@ -100,7 +98,7 @@ async function createInfo(room) {
     room.subscribe("party:reload-others", (data) => {
       if (!room) return
       if (data.sender !== room.info().guestName) {
-        log.log("Recieved reload-others partyEvent. Reloading...")
+        log.warn('Received "reload-others" event. Reloading...')
         window.location.reload()
       }
     })
@@ -108,7 +106,7 @@ async function createInfo(room) {
     room.subscribe("party:disconnect-others", (data) => {
       if (!room) return
       if (data.sender != room.info().guestName) {
-        log.log("Recieved disconnect-others partyEvent. Disconnecting...")
+        log.warn('Received "disconnect-others" event. Disconnecting...')
         room.disconnect()
         createInfo(room)
       }
