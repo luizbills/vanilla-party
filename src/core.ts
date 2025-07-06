@@ -18,7 +18,9 @@ export const partyConnect = (
   cb?: () => void
 ) => {
   if (room !== null) {
-    log.warn("You should call partyConnect() only one time")
+    log.error(
+      "You are already connected. Call partyDisconnect() before calling partyConnect() again!"
+    )
     return
   }
   const load = async () => {
@@ -30,7 +32,9 @@ export const partyConnect = (
     })
 
     // finish up
-    log.log("partyConnect() done!")
+    log.log(
+      `partyConnect() done! You are in the room "${room.info().roomName}"`
+    )
     cb?.()
   }
   load()
@@ -42,7 +46,9 @@ export const partyDisconnect = () => {
     log.error("partyDisconnect() called before partyConnect()")
     return
   }
+  log.warn(`You have been disconnected from room "${room.info().roomName}".`)
   room.disconnect()
+  room = null
 }
 
 /// partyLoadShared

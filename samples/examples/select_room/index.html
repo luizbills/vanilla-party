@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      canvas {
+        margin: 1px;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Room:
+      <select id="room">
+        <option value="room1">room1</option>
+        <option value="room2">room2</option>
+        <option value="room3">room3</option>
+      </select>
+      <button id="connect">Connect</button>
+    </p>
+    <script src="https://unpkg.com/p5@1/lib/p5.js"></script>
+    <script src="/dist/vanilla-party.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
