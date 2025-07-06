@@ -151,7 +151,7 @@ export class Room {
     const everyone = await this.#ds.presence.getAll()
 
     this.#guestNames = everyone
-      .filter((guestName) => guestName.startsWith(`${this.#roomId}/`))
+      .filter((guestName: string) => guestName.startsWith(`${this.#roomId}/`))
       .concat(this.#guestName)
       .sort()
 
