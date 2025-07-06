@@ -9,7 +9,9 @@
     "library",
     "simple",
     "network",
-    "multiuser"
+    "multiuser",
+    "realtime",
+    "serverless"
   ],
   "repository": {
     "type": "git",
