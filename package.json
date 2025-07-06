@@ -29,7 +29,7 @@
   "scripts": {
     "start": "npm run esbuild -- src/web.ts --watch --outfile=samples/dist/vanilla-party.js --servedir=samples",
     "dev": "npm run start",
-    "test": "jest --coverage=false",
+    "test": "jest",
     "release": "np",
     "serve": "PORT=${PORT:-6020} deepstream start",
     "build:module": "npm run esbuild -- src/index.ts --format=esm --minify --outfile=dist/vanilla-party.mjs ",
@@ -47,7 +47,7 @@
     "buffer": "^6.0.3"
   },
   "devDependencies": {
-    "@deepstream/server": "^9.1.2",
+    "@deepstream/server": "^9.1.3",
     "@types/jest": "^29.5.14",
     "@types/reefjs": "^7.6.5",
     "esbuild": "^0.25.5",
