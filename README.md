@@ -15,9 +15,11 @@ _Vanilla Party_ is a library for easily prototyping online multi-user apps with 
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
-- [Getting Started](#getting-started)
-- [Hosting a Server](#hosting-a-server)
 - [API Documentation](#api-documentation)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
 
 ## Introduction
 
@@ -417,17 +419,53 @@ Nothing.
 partyToggleInfo(true)
 ```
 
-## Hosting a Server
+## Frequently Asked Questions
 
-_Vanilla Party_ need to connect to a server (a [deepstream.io](https://deepstream.io) instance) in order to synchronize their data.
+### Do I need a username and password to connect to the server?
 
-You don’t necessarily need to set up your own server. Get started with our demo server:
+No.
+
+### Can I set up usernames and passwords on my own deepstream.io server?
+
+No. _Vanilla Party_ does not provide any way to limit connections or authenticate users. Adding an authentication and permission system would significantly increase the complexity. _Vanilla Party_ is focused on ease-of-use, experimentation, and prototyping. If you need security, _Vanilla Party_ won’t work for you.
+
+### When do I use different app names?
+
+Typically, you use a unique app name for every project you are making.
+
+### What would happen if I use the same app name as someone else?
+
+If you use the same app name as someone else on the same server, your shared data and messages might accidentally get mixed up. To avoid using someone else’s app name, add a prefix to your app name. E.g.: instead of `"pong"`, use `"johnwick-pong"`.
+
+### What kind of data can be shared?
+
+Shared objects can contain only data. They cannot contain methods or internal (private) state. These simple, data-only objects are sometimes called "Plain Old JavaScript Objects" (POJOs).
+
+Shared objects **can** share basic data types: numbers, strings, booleans, null, arrays and other objects.
+
+You **can not** share: `Infinity`, `NaN`, functions, DOM Elements, symbol values, class instances, etc.
+
+If you set a property’s value as `undefined` the property will be removed.
+
+> Pro Tip: In general any data that is JSON serializable can be shared, and data that isn’t JSON serializable can not.
+
+### How do I avoid data conflicts if I have multiple clients writing to the same object?
+
+If your game requires a shared object across multiple clients, it is pertinent that they write to the object at different times. A few ways to do that are ensuring that only one client (the host) is writing to the object as shown or creating a turn based logic.
+
+### How is the host chosen?
+
+When an user connects to an empty room, that user is designated as host immediately and remains host until it disconnects. When the current host disconnects, another host is chosen automatically.
+
+### Can I host my own server?
+
+You don’t necessarily need to set up your own server. You can get started with our demo server:
 
 `wss://vanilla-party.luizbills.com`
 
 This is the easiest way to get started and for quick throw-away prototypes, but don’t count on the server being around for long term. Someday it might move to a new url, have an unplanned outage, or go offline forever. Fortunately, setting up your own server and switching to it isn’t that hard.
 
-If you need long term stability, you might want to set up your own server using [Node.js](https://nodejs.org/):
+But if you need long term stability, you might want to set up your own server using [Node.js](https://nodejs.org/):
 
 ```
 git clone https://github.com/luizbills/deepstream.io-public deepstream-server
