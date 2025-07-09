@@ -158,6 +158,8 @@ A function to be called when the connection is ready.
 
 Nothing.
 
+---
+
 ### `partyDisconnect()`
 
 Immediately disconnects the local user. The user’s shared object will be removed from other guests arrays. The disconnect user will have continue to have access to shared objects, including the guest array, but they will no longer sync.
@@ -169,6 +171,8 @@ None.
 #### Returns
 
 Nothing.
+
+---
 
 ### `partyLoadShared(name, initObject?, callback?)`
 
@@ -194,6 +198,8 @@ A function to be called when the shared object is ready (fully loaded from the s
 
 Returns an empty object `{}` which will be populated with the synced properties as soon as they are loaded from the server. The property values of the shared object are synchronized between connected users in the room.
 
+---
+
 ### `partyLoadMyShared(initObject?, callback?)`
 
 Returns the local user’s shared data object.
@@ -211,6 +217,8 @@ A function to be called when the shared object is ready (fully loaded from the s
 #### Returns
 
 The local user's shared object.
+
+---
 
 ### `partySetShared(sharedObject, data)`
 
@@ -244,6 +252,8 @@ data to write in `sharedObject`.
 
 Nothing.
 
+---
+
 ### `partyLoadGuestShareds()`
 
 _Vanilla Party_ maintains a shared object for each user in the room. `partyLoadGuestShareds()` returns a dynamic array of these shared objects that is kept up to date as users join and leave the room. But if an user’s shared object is empty (it has no properties) it will NOT be included in that dynamic array.
@@ -255,6 +265,8 @@ None.
 #### Returns
 
 The dynamically updated array of shared objects.
+
+---
 
 ### `partyWatchShared(shared, [path], callback, triggerNow?)`
 
@@ -304,6 +316,8 @@ partyWatchShared(shared, "x", function (x) {
 })
 ```
 
+---
+
 ### `partyIsHost()`
 
 Check to see if the local user has designated as the room’s host.
@@ -317,6 +331,8 @@ None.
 #### Returns
 
 Returns `true` if the local user is the host, otherwise returns `false`.
+
+---
 
 ### `partyEmit(eventName, data?)`
 
@@ -336,6 +352,8 @@ The data to send.
 
 Nothing.
 
+---
+
 ### `partySubscribe(eventName, callback)`
 
 Register a callback to handle incoming event messages.
@@ -353,6 +371,8 @@ A function to be called when event message is received.
 #### Returns
 
 Nothing.
+
+---
 
 ### `partyUnsubscribe(eventName, callback?)`
 
@@ -372,6 +392,8 @@ The callback that you want to remove. If you don’t provide a callback, **all**
 
 Nothing.
 
+---
+
 ### `partyCountGuests()`
 
 Returns the quantity of connected users in the room.
@@ -384,6 +406,8 @@ None.
 
 A `number`.
 
+---
+
 ### `partyGetRoom()`
 
 Returns the [Room](src/Room.ts) instance used by the local user connection.
@@ -394,7 +418,9 @@ Nothing.
 
 #### Returns
 
-The instance.
+The room instance.
+
+---
 
 ### `partyToggleInfo(show?)`
 
