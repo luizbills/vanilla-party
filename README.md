@@ -12,12 +12,12 @@ _Vanilla Party_ is a library for easily prototyping online multi-user apps with 
 
 ## Contents
 
-- [Introduction][#introduction]
-- [Installation][#installation]
-- [Getting Started][#getting-started]
-- [Getting Started][#getting-started]
-- [Hosting a Server][#hosting-a-server]
-- [API Documentation][#api-documentation]
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Getting Started](#getting-started)
+- [Hosting a Server](#hosting-a-server)
+- [API Documentation](#api-documentation)
 
 ## Introduction
 
