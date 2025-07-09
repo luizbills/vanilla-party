@@ -510,7 +510,7 @@ We welcome new contibuters. Please feel free to start a [discussion](https://git
 
 ## Acknowledgements
 
-_Vanilla Party_ is heavily based on [jbakse/p5.party](https://github.com/jbakse/p5.party), a P5 library builds on [deepstream.io](http://deepstream.io) and [sindresorhus/on-change](https://github.com/sindresorhus/on-change). Deepstream is a realtime data-sync server that can be easily self hosted on services like [heroku](heroku.com) or [aws](https://aws.amazon.com/free). on-change uses javascript [proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) to make a fully observable object.
+_Vanilla Party_ is heavily based on [jbakse/p5.party](https://github.com/jbakse/p5.party), a P5 library builds on [deepstream.io](http://deepstream.io) and [sindresorhus/on-change](https://github.com/sindresorhus/on-change). Deepstream is a realtime data-sync server that can be easily self hosted on services like Heroku, Digital Ocean, Google Cloud, Fly.io, etc. on-change uses javascript [proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) to make a fully observable object.
 
 - [jbakse/p5.party](https://github.com/jbakse/p5.party)
 - [deepstream.io](http://deepstream.io)
