@@ -74,7 +74,7 @@ partyConnect(serverUrl, appName, room, (data) => {
   partySubscribe("message", (data) => {
     messages.append(
       html(
-        `<strong>escHtml${escHtml(data.sender)}</strong>:
+        `<strong>${escHtml(data.sender)}</strong>:
         ${escHtml(data.text)}`
       )
     )
