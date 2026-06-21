@@ -79,7 +79,7 @@ window.addEventListener("load", () => {
   let div = null
 
   // server url
-  const serverUrl = "wss://vanilla-party.luizbills.com/"
+  const serverUrl = "wss://deepstream-io-vanilla-party.fly.dev/"
 
   // your app name (tip: avoid generic names)
   const appName = "my-party-app"
@@ -126,7 +126,7 @@ window.addEventListener("load", () => {
 })
 ```
 
-[Live Demo](https://jsbin.com/sumohuxovi/edit?output) (Try in two browser windows at once)
+[Live Demo](https://jsbin.com/zejotayuca/edit?js,output) (Try in two browser windows at once)
 
 > Note: This example is using only javascript and HTML to illustrate how easy it is to get started with Vanilla Party. In our [examples](samples), we'll use P5.js for user interaction and rendering.
 
@@ -140,7 +140,7 @@ Connects the local user to a _Vanilla Party_ server.
 
 **host: `string`**
 
-The server to connect to. You can host your own server or use my demo server: `wss://vanilla-party.luizbills.com`
+The server to connect to. You can host your own server or use my demo server: `wss://deepstream-io-vanilla-party.fly.dev`
 
 **appName: `string`**
 
@@ -487,7 +487,7 @@ When an user connects to an empty room, that user is designated as host immediat
 
 You don’t necessarily need to set up your own server. You can get started with our demo server:
 
-`wss://vanilla-party.luizbills.com`
+`wss://deepstream-io-vanilla-party.fly.dev`
 
 This is the easiest way to get started and for quick throw-away prototypes, but don’t count on the server being around for long term. Someday it might move to a new url, have an unplanned outage, or go offline forever. Fortunately, setting up your own server and switching to it isn’t that hard.
 
