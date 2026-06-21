@@ -17,7 +17,11 @@ function start(room) {
 
   sketch = new p5((p) => {
     p.setup = function () {
-      partyConnect("wss://vanilla-party.luizbills.com", "hello_party", room)
+      partyConnect(
+        "wss://deepstream-io-vanilla-party.fly.dev",
+        "hello_party",
+        room
+      )
       partyLoadShared("shared", { x: 100, y: 100 }, (data) => {
         shared = data
       })

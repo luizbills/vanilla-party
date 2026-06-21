@@ -19,7 +19,7 @@ const connectionStatus = $("#status")
 let me = {}
 
 // server info
-const serverUrl = "wss://vanilla-party.luizbills.com/"
+const serverUrl = "wss://deepstream-io-vanilla-party.fly.dev"
 const appName = "chat"
 const room = "main"
 

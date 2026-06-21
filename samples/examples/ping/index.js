@@ -3,7 +3,7 @@ let ping = false
 
 function setup() {
   // const url = "ws://0.0.0.0:6020"
-  const url = "wss://vanilla-party.luizbills.com"
+  const url = "wss://deepstream-io-vanilla-party.fly.dev"
 
   partyConnect(url, "test_ping", "main")
 

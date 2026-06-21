@@ -9,7 +9,7 @@ import * as log from "../src/log"
 export const HOST = "ws://127.0.0.1:6020"
 export const DELAY = 200
 
-// export const HOST = "wss://vanilla-party.luizbills.com";
+// export const HOST = "wss://deepstream-io-vanilla-party.fly.dev";
 // export const DELAY = 500;
 
 export const errorSpy = //

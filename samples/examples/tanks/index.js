@@ -1,8 +1,8 @@
 let stats, shared, my, guests
 
 function setup() {
-  const url = "ws://0.0.0.0:6020"
-  // const url = "wss://vanilla-party.luizbills.com"
+  // const url = "ws://0.0.0.0:6020"
+  const url = "wss://deepstream-io-vanilla-party.fly.dev"
 
   partyConnect(url, "tanks", "main")
   partyLoadShared("shared", { bullets: [] }, (data) => {
